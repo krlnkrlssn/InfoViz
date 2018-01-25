@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <title>InfoViz1 of Karolin Karlsson</title>
-<p style="color:#4aa34f; font-family:sans-serif; font-size:30px; text-align:center;">Total amount of 'skill points' for the students</p>
+<p style="color:#4aa34f; font-family:sans-serif; font-size:30px; text-align:center; transform:rotate(-90deg);">Total amount of 'skill points' for the students</p>
 <style>
 
 .axis .domain {
@@ -32,6 +32,8 @@ var z = d3.scaleOrdinal()
 d3.csv("raw_data.csv", function(d, i, columns) {
   for (i = 6, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
   d.total = t;  
+     //   console.log(d.Alias);
+
   return d; // d is the person object
 }, function(error, data) {
   if (error) throw error;
@@ -52,30 +54,24 @@ d3.csv("raw_data.csv", function(d, i, columns) {
     .selectAll("rect")
     .data(function(d) { return d; })
     .enter().append("rect")
-    .attr("x", function(d) { return x(d.data.Alias); })
+    .attr("x", function(d) { return  x(d.data.Alias); })
+    //.attr("x", function(d) { return  x("<p style=transform:rotate(-90deg);"d.data.Alias"</p>"); })
     .attr("y", function(d) { return y(d[1]); })
     .attr("height", function(d) { return y(d[0]) - y(d[1]); })
     .attr("width", x.bandwidth());
     
     
-    console.log(g);
-
   g.append("g")
     .attr("class", "axis")
+    //.attr("transform", "rotate(-90deg)")
     .attr("transform", "translate(0," + height + ")")
-    .attr("fill", "#4aa34f")
     .call(d3.axisBottom(x));
 
   g.append("g")
     .attr("class", "axis")
     .call(d3.axisLeft(y).ticks(null, "s"))
-    .append("text")
-    .attr("x", 2)
-    .attr("y", y(y.ticks().pop()) + 0.5)
-    .attr("dy", "0.32em")
-    .attr("fill", "#000")
-    .attr("font-weight", "bold")
-    .attr("text-anchor", "start");
+    .append("text");
+ //   .attr("text-anchor", "start");
 
     // The text about skills
   var legend = g.append("g")
