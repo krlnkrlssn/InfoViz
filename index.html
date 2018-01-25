@@ -65,13 +65,11 @@ d3.csv("raw_data.csv", function(d, i, columns) {
 
 
               g.append("g")
-                .attr("transform", "rotate(-90deg)")
                 .attr("class", "axis")
                 .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x));
 
               g.append("g")
-               // .attr("transform", "rotate(-90deg)")
                 .attr("class", "axis")
                 .call(d3.axisLeft(y).ticks(null, "s"))
                 .append("text");
